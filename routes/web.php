@@ -18,9 +18,7 @@ Route::get('/', function () {
 });
 
 // Employee Routes
-Route::get('/employees', [\App\Http\Controllers\EmployeeController::class, 'list'])->name('employees');
-Route::get('/employees/{id}', [\App\Http\Controllers\EmployeeController::class, 'show'])->name('getEmployee');
+Route::get('/employees', [\App\Http\Controllers\EmployeeController::class, 'index'])->name('employees');
 
 // Customer Routes
-Route::get('/customers', [\App\Http\Controllers\CustomerController::class, 'list'])->name('customers');
-Route::get('/customers/{id}', [\App\Http\Controllers\CustomerController::class, 'show'])->name('getCustomer');
+Route::get('/customers', [\App\Http\Controllers\CustomerController::class, 'index'])->name('customers');

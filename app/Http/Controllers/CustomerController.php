@@ -7,13 +7,17 @@ use App\Models\Customer;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller {
-    public function list(Request $request) {
-        $customers = Customer::with('hobbies')->get()->toArray();
-        return view('customers.list', compact('customers'));
-    }
+    public function index(Request $request) {
+         // Get the search value from the request
+         $search = $request->input('search');
 
-    public function show(Request $request, $id) {
-        $customer = Customer::with('hobbies')->where('id', $id)->first()->toArray();
-        return view('customers.show', compact('customer'));
+         $customers = Customer::with('hobbies')
+                         ->where('name', 'LIKE', "%{$search}%")
+                         ->orWhereHas('hobbies', function ($query) use ($search) {
+                             $query->where('name', 'LIKE', "%{$search}%");
+                         })
+                         ->get()
+                         ->toArray();
+        return view('customers.list', compact('customers'));
     }
 }

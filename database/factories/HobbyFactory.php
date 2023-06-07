@@ -19,7 +19,7 @@ class HobbyFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name(),
+            'name' => $this->faker->randomElement(['Reading Books', 'Watching TV', 'Dancing', 'Singing', 'Comics', 'Games', 'Playing']),
             'hobbiable_id' => $this->faker->numberBetween(1, 20),
             'hobbiable_type' => $this->faker->randomElement([Employee::class, Customer::class])
         ];
